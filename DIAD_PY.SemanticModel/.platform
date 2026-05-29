@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "DIAD_PY"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "9d2ea605-c79f-83fd-44cf-ed0ac14633c2"
+  }
+}

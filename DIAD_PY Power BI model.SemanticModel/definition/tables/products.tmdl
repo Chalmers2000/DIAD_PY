@@ -1,0 +1,123 @@
+table products
+	lineageTag: 90af5a6d-8c3e-442d-933a-f30f0240dfdc
+	sourceLineageTag: [dbo].[products]
+
+	column ProductID
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: a0ed0e8f-bdde-413f-a862-41726f934ec8
+		sourceLineageTag: ProductID
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Product Name
+	column Product
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: bb3a5757-913c-4602-873d-356534258a21
+		sourceLineageTag: Product
+		summarizeBy: none
+		sourceColumn: Product
+
+		changedProperty = Description
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Product Category
+	column Category
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 7c500e25-ed99-4c76-b038-308ec0f9a143
+		sourceLineageTag: Category
+		summarizeBy: none
+		sourceColumn: Category
+
+		changedProperty = Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column ManufacturerID
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: e9723ddb-1715-45ba-b87c-b1fe2bc94605
+		sourceLineageTag: ManufacturerID
+		summarizeBy: none
+		sourceColumn: ManufacturerID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Product Segment
+	column Segment
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3a2c50ef-27c5-4b0d-b192-7fa1c87c8f14
+		sourceLineageTag: Segment
+		summarizeBy: none
+		sourceColumn: Segment
+
+		changedProperty = Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column Currency
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: ad2f9847-cca3-4bcc-8eef-7cc0c80ea25f
+		sourceLineageTag: Currency
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Price, Manufacturer Suggested Retail Price
+	column MSRP
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(10, 2)
+		lineageTag: d838d239-052c-429f-8219-450acdec394f
+		sourceLineageTag: MSRP
+		summarizeBy: sum
+		sourceColumn: MSRP
+
+		changedProperty = Description
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	hierarchy 'Product Hierarchy'
+		lineageTag: 6a8f3a58-9b7d-4316-a999-d8522fe234b7
+
+		level Category
+			lineageTag: 664e84cd-b9d4-4536-a758-07838ce1db84
+			column: Category
+
+		level Segment
+			lineageTag: f9a9163b-c4de-4113-9e7c-025988af7ab5
+			column: Segment
+
+		level Product
+			lineageTag: d607727a-0747-4ebb-bb61-7f411511fdb7
+			column: Product
+
+		changedProperty = Name
+
+	partition products = entity
+		mode: directLake
+		source
+			entityName: products
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

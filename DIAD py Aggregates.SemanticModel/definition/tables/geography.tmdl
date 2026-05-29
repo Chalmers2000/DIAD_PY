@@ -1,0 +1,77 @@
+table geography
+	lineageTag: dde781f7-4db2-4a98-ab55-9744ec5b0396
+
+	column Zip
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 1ed8233a-78ff-42f2-8f20-935cfa6273ae
+		summarizeBy: none
+		sourceColumn: Zip
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 7e2d848f-5534-4919-879a-f10c8db00292
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e9b193b9-fd70-4e91-a8cc-04b352c6fa94
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 1231d9f3-7ade-4f51-860b-4000de4ce246
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column District
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 0a0badb6-08f1-46ae-8b90-835623bc21a8
+		summarizeBy: none
+		sourceColumn: District
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 5d1fadfb-1de0-45ea-860a-6ef06bf1a0a1
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column ZipCountry
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 0abd3b7f-e8d5-4281-bb01-51866a89798d
+		summarizeBy: none
+		sourceColumn: ZipCountry
+
+		annotation SummarizationSetBy = Automatic
+
+	partition geography = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("fz2ypgmdnfuejcdxrgbj7yquca-v26c3m2bpdgu5afjh72tglncr4.datawarehouse.fabric.microsoft.com", "DIAD_PY"),
+				    dbo_geography = Source{[Schema="dbo",Item="geography"]}[Data]
+				in
+				    dbo_geography
+
+	annotation PBI_ResultType = Table
+

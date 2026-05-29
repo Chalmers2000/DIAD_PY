@@ -1,0 +1,93 @@
+table 'sales (2)'
+	isHidden
+	lineageTag: c667f7f9-9a58-4760-8b60-cdc0065a34cd
+
+	column ProductID
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: bccf6626-2f36-4910-9183-0e1676d84303
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Count
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: b94f09dc-9fd0-47a8-aaa9-542f7f6a2b9d
+		summarizeBy: sum
+		sourceColumn: Count
+
+		alternateOf
+			summarization: count
+			baseTable: sales
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SumRevenue
+		dataType: double
+		isHidden
+		sourceProviderType: decimal(38, 2)
+		lineageTag: 6b61f562-7696-4030-a9ee-f80053076622
+		summarizeBy: sum
+		sourceColumn: SumRevenue
+
+		alternateOf
+			summarization: sum
+			baseColumn: sales.Revenue
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SumUnits
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 669f810c-3041-4e74-99d6-d5381264b6b8
+		summarizeBy: sum
+		sourceColumn: SumUnits
+
+		alternateOf
+			summarization: sum
+			baseColumn: sales.Units
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'sales (2)' = m
+		mode: import
+		source = ```
+				let
+				    Source = Sql.Database("fz2ypgmdnfuejcdxrgbj7yquca-v26c3m2bpdgu5afjh72tglncr4.datawarehouse.fabric.microsoft.com", "DIAD_PY"),
+				    dbo_sales = Source{[Schema="dbo",Item="sales"]}[Data],
+				    #"Grouped Rows" = Table.Group(
+				    dbo_sales, 
+				    {"ProductID"}, 
+				    {
+				        {"Count", each Table.RowCount(_), Int64.Type},
+				        {"SumUnits", each Int64.From(List.Sum([Units])), Int64.Type},
+				        {"SumRevenue", each List.Sum([Revenue]), type nullable number}
+				    }
+				)
+				in
+				    #"Grouped Rows"
+				```
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

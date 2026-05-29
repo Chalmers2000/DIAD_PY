@@ -1,0 +1,81 @@
+table products
+	lineageTag: 3f080b5f-6e4b-4305-b0f3-c8b81d56e9cf
+
+	column ProductID
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: cd489cf9-20de-4dcf-a8d6-87a3e9f5b5d0
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 80b8b5ff-365a-4fa7-904e-d2f498fc4ed7
+		summarizeBy: none
+		sourceColumn: Product
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 170824ff-73bd-4373-8af3-4cf494f47e54
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column ManufacturerID
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f1e43758-f93a-493f-a149-e4706d48429e
+		summarizeBy: none
+		sourceColumn: ManufacturerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Segment
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: cd85878d-5e9d-4154-81f9-9a347220ee47
+		summarizeBy: none
+		sourceColumn: Segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Currency
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: cebe3011-1f57-4e0a-8e4d-a154c67fe909
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column MSRP
+		dataType: double
+		sourceProviderType: decimal(10, 2)
+		lineageTag: 59cb6957-72c2-45d2-879e-a6721b792c8f
+		summarizeBy: sum
+		sourceColumn: MSRP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition products = m
+		mode: dual
+		source =
+				let
+				    Source = Sql.Database("fz2ypgmdnfuejcdxrgbj7yquca-v26c3m2bpdgu5afjh72tglncr4.datawarehouse.fabric.microsoft.com", "DIAD_PY"),
+				    dbo_products = Source{[Schema="dbo",Item="products"]}[Data]
+				in
+				    dbo_products
+
+	annotation PBI_ResultType = Table
+

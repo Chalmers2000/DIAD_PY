@@ -1,0 +1,61 @@
+table manufacturer
+	lineageTag: a13edb7b-99ad-4083-8502-1ea122ea9aca
+	sourceLineageTag: [dbo].[manufacturer]
+
+	column ManufacturerID
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 675753c6-f166-4633-a378-27e62089ff40
+		sourceLineageTag: ManufacturerID
+		summarizeBy: none
+		sourceColumn: ManufacturerID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Name of Manufacturer
+	column Manufacturer
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 4eceaaa2-9fb7-45b7-95cf-7e3aaf5f9db1
+		sourceLineageTag: Manufacturer
+		isDefaultLabel
+		summarizeBy: none
+		sourceColumn: Manufacturer
+
+		changedProperty = Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column Logo
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e1c09448-77f9-46a3-8428-73105d4b6402
+		sourceLineageTag: Logo
+		summarizeBy: none
+		sourceColumn: Logo
+
+		annotation SummarizationSetBy = Automatic
+
+	column ManufacturerGroups
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: c50920de-a4a3-4a89-ac87-d017cd42ba7a
+		sourceLineageTag: ManufacturerGroups
+		summarizeBy: none
+		sourceColumn: ManufacturerGroups
+
+		annotation SummarizationSetBy = Automatic
+
+	partition manufacturer = entity
+		mode: directLake
+		source
+			entityName: manufacturer
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

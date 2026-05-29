@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "DIAD_PY Power BI model"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "94fde1fd-fa09-92bb-4c4b-8e25a0f819be"
+  }
+}

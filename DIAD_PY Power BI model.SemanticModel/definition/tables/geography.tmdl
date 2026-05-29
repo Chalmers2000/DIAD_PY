@@ -1,0 +1,115 @@
+table geography
+	lineageTag: ebe24128-0db1-4859-a491-a04b48e0123c
+	sourceLineageTag: [dbo].[geography]
+
+	column Zip
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 5fb036f3-9579-4cb2-8ed3-dd1b43cea61b
+		sourceLineageTag: Zip
+		dataCategory: PostalCode
+		summarizeBy: none
+		sourceColumn: Zip
+
+		changedProperty = DataCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e777e252-3c1a-465e-bd0e-5232841a6b60
+		sourceLineageTag: City
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: City
+
+		changedProperty = DataCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 95169215-1ac1-485a-9020-64fe3f35a830
+		sourceLineageTag: State
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: State
+
+		changedProperty = DataCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: c950686f-ad89-46b0-bef8-42ae027a2bf7
+		sourceLineageTag: Region
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column District
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 21219a39-031e-4063-8c40-1aed12aed22e
+		sourceLineageTag: District
+		summarizeBy: none
+		sourceColumn: District
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: dbf3debe-ce6d-440f-9702-a8cc62a08687
+		sourceLineageTag: Country
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		changedProperty = DataCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column ZipCountry
+		dataType: string
+		isHidden
+		sourceProviderType: varchar(8000)
+		lineageTag: 687093a9-b378-4262-ab9b-eabaa54bbb88
+		sourceLineageTag: ZipCountry
+		summarizeBy: none
+		sourceColumn: ZipCountry
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Geo Hierarchy'
+		lineageTag: 7f9ddaed-c3cd-4699-ac2e-2d29f7e8c532
+
+		level Country
+			lineageTag: 34e07706-0300-4d36-a399-f399c1e55de9
+			column: Country
+
+		level State
+			lineageTag: 3c045db8-0119-403f-a5a4-5e998f20ca63
+			column: State
+
+		level City
+			lineageTag: bf7a6982-0386-4d24-b014-a75a55ee2ebd
+			column: City
+
+		changedProperty = Name
+
+	partition geography = entity
+		mode: directLake
+		source
+			entityName: geography
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

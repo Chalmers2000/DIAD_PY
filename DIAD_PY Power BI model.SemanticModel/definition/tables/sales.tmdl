@@ -1,0 +1,140 @@
+table sales
+	lineageTag: 66e6957c-1743-4d3f-8e5b-64cb03357d5e
+	sourceLineageTag: [dbo].[sales]
+
+	/// Last Year Sales, Prior Year Sales
+	measure 'PY Sales' = CALCULATE(SUM(Sales[Revenue]), SAMEPERIODLASTYEAR('Date'[Date]))
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 09216352-32eb-404f-91c9-eb82c26b74f4
+
+		changedProperty = Name
+
+		changedProperty = Description
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '% Growth' = DIVIDE([Sales]-[PY Sales],[PY Sales])
+		lineageTag: 7fa422ec-5af9-4cfb-a373-efb411f0f9ef
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Current Sales
+	measure Sales = SUM('sales'[Revenue])
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: de781533-93f2-47da-b47e-15b942f4f094
+
+		changedProperty = Name
+
+		changedProperty = Description
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column ProductID
+		dataType: int64
+		isHidden
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f8f36905-080e-4661-8d62-cb7624bb970f
+		sourceLineageTag: ProductID
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: ff2067ac-7613-4293-b4cc-01b383870438
+		sourceLineageTag: Date
+		summarizeBy: none
+		sourceColumn: Date
+
+		changedProperty = DataType
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Zip
+		dataType: string
+		isHidden
+		sourceProviderType: varchar(8000)
+		lineageTag: d0bb6dd7-07d1-47fc-8d71-f14ba5911158
+		sourceLineageTag: Zip
+		summarizeBy: none
+		sourceColumn: Zip
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Units
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 0a60dd14-efda-42d6-87d0-41df39454faa
+		sourceLineageTag: Units
+		summarizeBy: sum
+		sourceColumn: Units
+
+		annotation SummarizationSetBy = Automatic
+
+	column Revenue
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(10, 2)
+		lineageTag: 8c4d8d1f-957e-4abb-8ad7-1f79366b8115
+		sourceLineageTag: Revenue
+		isDefaultLabel
+		summarizeBy: sum
+		sourceColumn: Revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column Country
+		dataType: string
+		isHidden
+		sourceProviderType: varchar(8000)
+		lineageTag: 20626a3e-2bc7-46ef-9924-e1191da7565f
+		sourceLineageTag: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ZipCountry
+		dataType: string
+		isHidden
+		sourceProviderType: varchar(8000)
+		lineageTag: e90dd81c-27fe-465d-b06a-115db2f86b18
+		sourceLineageTag: ZipCountry
+		summarizeBy: none
+		sourceColumn: ZipCountry
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition sales = entity
+		mode: directLake
+		source
+			entityName: sales
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

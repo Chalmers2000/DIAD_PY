@@ -1,0 +1,27 @@
+model Model
+	culture: en-US
+	collation: Latin1_General_100_BIN2_UTF8
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBIDesktopVersion = 2.143.7650.3 (Main)+8566dd2ea26f4aba4b360a9c4b603a10dc8eecb3
+
+annotation PBI_QueryOrder = ["DatabaseQuery"]
+
+annotation __PBIService_Versioning_SaveVersion = f49d362a-35d8-46c8-a3b1-0a57654933a3
+
+annotation PBI_ProTooling = ["WebModelingEdit","DaxQueryView_Desktop","DaxCopilot_Change_Accepted_In_Desktop"]
+
+ref table sales
+ref table geography
+ref table products
+ref table manufacturer
+ref table date
+
+ref cultureInfo en-US
+

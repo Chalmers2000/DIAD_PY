@@ -1,0 +1,20 @@
+relationship 396832f4-e0c6-81a9-b097-710e5b88d66b
+	fromColumn: products.ManufacturerID
+	toColumn: manufacturer.ManufacturerID
+
+relationship 3d371ce4-0d8e-f90c-6df1-72a3f66c4a1c
+	fromColumn: sales.ZipCountry
+	toColumn: geography.ZipCountry
+
+relationship 5a271f0f-74d6-1dbb-7563-e77bf5ffe0ea
+	fromColumn: sales.ProductID
+	toColumn: products.ProductID
+
+relationship 35da4e50-806b-b7b0-f2fd-504d92465ee6
+	fromColumn: sales.Date
+	toColumn: date.date
+
+relationship ecaaa073-5165-652f-d3bb-0ca74692e000
+	fromColumn: 'sales (2)'.ProductID
+	toColumn: products.ProductID
+
