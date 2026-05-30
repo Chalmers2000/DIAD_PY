@@ -16,9 +16,11 @@ So you've completed the Power BI Dashboard-in-a-Day workshop! I hope you loved i
 ## One tiny cheat - the Excel file (bi_dimensions.xlsx)
 * All the data for DIAD is available as a download from Microsoft's DAID workshop site,
     * https://learn.microsoft.com/en-us/training/modules/intro-power-bi/
-* However, three of the dimension tables are in the Microsoft Excel file bi_dimensions.xlsx.
+* However, three of the dimension tables are in the Microsoft Excel file **bi_dimensions.xlsx.**
 
 * Yes, there are Pandas libraries for exracting data from Excel, but for the sake of keeping the notebooks easy to follow, I have simply done a 'Save As CSV' from the source Excel file and presented the files as .csv in the attached .zip [bi_dimensions_csv.zip](bi_dimensions_csv.zip)
+
+![Excel data file](Images/image2.png)
 
     * I preserved the orignal excercise challenges of the .xlsx file, like removing the header and footer rows, etc.
 
@@ -29,4 +31,4 @@ So you've completed the Power BI Dashboard-in-a-Day workshop! I hope you loved i
 * I have also added a simple Date.csv table for convenience, replacing the DAX table creation step.
 
 ## AI Disclaimer
-* Copilot did help with some of the trickier transformations, such as "transpose." 
+* Copilot did help with some of the trickier transformations, such as "transpose." These are aidentified in the Notebook comments where they occurred. 
